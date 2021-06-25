@@ -1,30 +1,30 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
-    <!-- {{ aaa }} -->
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <div id="nav">
+      <router-link to="/three/car">Car</router-link> | 
+      <router-link to="/three/feature">Feature</router-link> |
+      <router-link to="/three/music">music</router-link> |
+      <router-link to="/three/sprite">sprite</router-link>|
+      <router-link to="/example/test1">test1</router-link>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
-
-// let bbb = 999
 
 export default defineComponent({
   name: 'Home',
-  components: {
-    HelloWorld
-  },
   data() {
     return {
       aaa: '111'
     }
-    // aaa: 111
   },
   methods: {
-    fn() {}
+    fn() {
+      console.log(888)
+    }
   }
 })
 </script>

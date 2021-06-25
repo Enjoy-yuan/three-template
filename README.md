@@ -52,11 +52,13 @@ module.exports = {
   extends: [
     'plugin:vue/vue3-essential',
     'eslint:recommended'
+    // 必须注释，否则'space-before-function-paren': 'off'配置不生效
     // '@vue/typescript/recommended'
+
   ],
   parserOptions: {
-    // 新加，需安装依赖yarn add babel-eslint -D
-    parser: 'babel-eslint', 
+    // 新加，需安装依赖yarn add babel-eslint -D，否则router下index.ts文件报错
+    parser: 'babel-eslint',
     ecmaVersion: 2020
   },
   rules: {
