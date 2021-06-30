@@ -15,40 +15,44 @@
 import * as THREE from 'three'
 import ThreeApp from '@three/Utils/sceneLoader'
 
+let animationFrame = null
+let app = null
+let mesh = null
+
 export default {
   data() {
     return {
-      animationFrame: null,
-      app: null,
-      mesh: null
+      // animationFrame: null,
+      // app: null,
+      // mesh: null
     }
   },
   mounted() {
     this.init()
   },
-  beforeDestroy() {
-    cancelAnimationFrame(this.animationFrame)
+  beforeUnmount() {
+    cancelAnimationFrame(animationFrame)
   },
   methods: {
     init() {
-      this.app = new ThreeApp({ width: 1000, height: 500 })
+      app = new ThreeApp({ width: 1000, height: 500 })
       let boxGeometry = new THREE.BoxGeometry(10, 10, 10)
       let material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
-      this.mesh = new THREE.Mesh(boxGeometry, material)
-      this.app.scene.add(this.mesh)
-      this.app.addControls()
+      mesh = new THREE.Mesh(boxGeometry, material)
+      app.scene.add(mesh)
+      app.addControls()
       this.loop()
     },
     installLabel() {
       if (!document.getElementsByClassName('labelText')[0]) {
         {
-          this.app.addLabel(this.mesh, '修改前的文字')
+          app.addLabel(mesh, '修改前的文字')
         }
       }
     },
     uninstallLabel() {
-      if (this.app.scene.getObjectByName('labelText')) {
-        let label = this.app.scene.getObjectByName('labelText')
+      if (app.scene.getObjectByName('labelText')) {
+        let label = app.scene.getObjectByName('labelText')
         label.parent.remove(label)
         document.getElementsByClassName('labelRenderer')[0].innerHTML = ''
       }
@@ -64,15 +68,18 @@ export default {
       }
     },
     changeLabel() {
-      if (document.getElementsByClassName('labelText')[0] && document.getElementsByClassName('labelText')[0].style.visibility === 'visible') {
-        this.app.scene.getObjectByName('labelText').element.textContent = '修改后的文字'
+      if (
+        document.getElementsByClassName('labelText')[0] &&
+        document.getElementsByClassName('labelText')[0].style.visibility === 'visible'
+      ) {
+        app.scene.getObjectByName('labelText').element.textContent = '修改后的文字'
       }
     },
     loop() {
       console.log('render')
-      this.animationFrame = requestAnimationFrame(this.loop)
-      this.app.renderer.render(this.app.scene, this.app.camera)
-      this.app.labelRenderer.render(this.app.scene, this.app.camera)
+      animationFrame = requestAnimationFrame(this.loop)
+      app.renderer.render(app.scene, app.camera)
+      app.labelRenderer.render(app.scene, app.camera)
     }
   }
 }

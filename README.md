@@ -52,9 +52,7 @@ module.exports = {
   extends: [
     'plugin:vue/vue3-essential',
     'eslint:recommended'
-    // 必须注释，否则'space-before-function-paren': 'off'配置不生效
-    // '@vue/typescript/recommended'
-
+    '@vue/typescript/recommended'
   ],
   parserOptions: {
     // 新加，需安装依赖yarn add babel-eslint -D，否则router下index.ts文件报错
@@ -73,4 +71,25 @@ module.exports = {
 
 // 在.gitignore中注释.vscode文件夹
 # .vscode
+```
+
+## 4.在 vue3.0 中使用 threes.js 声明变量报错
+
+- 须将变量声明在外部
+
+```js
+// 变量的声明
+let animationFrame = null
+let app = null
+let mixer = null
+
+export default {
+  name: 'eighth',
+  data() {
+    return {
+      // animationFrame: null,
+      // app: null,
+      // mixer: null
+    }
+  },
 ```

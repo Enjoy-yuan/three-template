@@ -8,7 +8,7 @@
 <script>
 import ThreeApp from '@three/Utils/sceneLoader'
 
-let gltf = null
+// let gltf = null
 let animationFrame = null
 let app = null
 export default {
@@ -23,7 +23,7 @@ export default {
     this.init()
     this.installModel()
   },
-  beforeDestroy() {
+  beforeUnmount() {
     cancelAnimationFrame(animationFrame)
   },
   methods: {
@@ -36,7 +36,7 @@ export default {
     },
     installModel() {
       app.gltfLoader.load('/model/yeyazhijia.gltf', (res) => {
-        gltf = res.scene
+        // gltf = res.scene
         app.scene.add(res.scene)
       })
     },

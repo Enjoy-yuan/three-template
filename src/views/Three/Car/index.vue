@@ -1,62 +1,51 @@
 <template>
   <div>
-    <div id="three" style="font-size: 0;"></div>
+    <div style="position: absolute; text-align: center; width: 100%;top: 10px;">
+      <router-link to="/">返回首页</router-link>
+    </div>
+    <div id="three" style="font-size: 0"></div>
   </div>
 </template>
 
 <script>
-// import * as THREE from 'three'
 import ThreeApp from '../Utils/sceneLoader'
-let model = null
-let animationFrame = null
+
+let model = null // 场景
 let app = null
-// const window=window
+
 export default {
   data() {
     return {
-      // model: null, // 模型
-      // animationFrame: null,
-      // app: null
+      animationFrame: null
     }
   },
-
   mounted() {
+    // 初始化
     this.init()
+    // 加载模型
     app.gltfLoader.load('/model/xiaoche.gltf', (res) => {
       model = res.scene
       app.scene.add(model)
-      this.addShadow()
+      this.addShadow() // 显示阴影
     })
   },
   beforeUnmount() {
-    window.cancelAnimationFrame(animationFrame)
+    window.cancelAnimationFrame(this.animationFrame)
     app.removeStats()
     app.removeGUI()
-    // console.log(this.app.stats)
   },
   methods: {
     init() {
-      app = new ThreeApp()
-      app.addPointLight()
-      app.addAmbientLight()
-      app.scene.add(app.floor)
-      app.addStats()
-      app.addGUI()
-      app.addResize()
-      app.addControls()
+      app = new ThreeApp() // 初始化实例对象
+      app.addPointLight() // 添加点光源
+      app.addAmbientLight() // 添加环境光
+      app.scene.add(app.floor) // 添加地板
+      app.addStats() // 添加性能监控
+      app.addGUI() // 添加图形界面
+      app.addResize() // 添加自适应
+      app.addControls() // 添加控制器
       this.loop()
     },
-    // initControls() {
-
-    //     /* 飞行控件 */
-    //     controls = new THREE.FlyControls(camera, renderer.domElement);
-
-    //     /* 属性参数默认 */
-    //     controls.rollSpeed = Math.PI / 24; // 翻滚速度
-    //     controls.autoForward = true; //自动向前移动
-    //     controls.dragToLook = false;
-    //     controls.movementSpeed = 25; //移动速度
-    // },
     // 显示阴影
     addShadow() {
       // 渲染器开启阴影
@@ -83,7 +72,7 @@ export default {
       }
       app.floor.material.color.set(window.datGUI.floorColor)
       app.renderer.render(app.scene, app.camera)
-      animationFrame = window.requestAnimationFrame(this.loop)
+      this.animationFrame = window.requestAnimationFrame(this.loop)
       // var T = app.clock.getDelta() // 返回时间单位：秒
       // 可以在控制打印查看你的渲染时间间隔
       // console.log('两帧渲染时间间隔', T * 1000 + '毫秒')

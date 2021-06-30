@@ -9,7 +9,7 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
 import { OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass'
 import { CSS2DObject, CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js'
 
-import './object3DExtention'
+// import './object3DExtention'
 
 window.datGUI = {
   rotationSpeedX: 0,

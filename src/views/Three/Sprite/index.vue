@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div id="three" style="font-size: 0;"></div>
+    <div style="position: absolute; text-align: center; width: 100%; top: 10px">
+      <router-link to="/">返回首页</router-link>
+    </div>
+    <div id="three" style="font-size: 0"></div>
   </div>
 </template>
 
@@ -8,18 +11,17 @@
 import * as THREE from 'three'
 import ThreeApp from '../Utils/sceneLoader'
 
+let app = null
+let animationFrame = null
 export default {
   data() {
-    return {
-      app: null,
-      animationFrame: null
-    }
+    return {}
   },
   beforeUnmount() {
-    cancelAnimationFrame(this.animationFrame)
+    cancelAnimationFrame(animationFrame)
   },
   mounted() {
-    this.app = new ThreeApp()
+    app = new ThreeApp()
     const particles = 2000
     const geometry = new THREE.BufferGeometry()
     const positions = []
@@ -48,16 +50,16 @@ export default {
       opacity: 0.7
     })
     const points = new THREE.Points(geometry, material)
-    this.app.scene.add(points)
+    app.scene.add(points)
 
     const loop = () => {
       console.log('render')
       points.rotation.x += 0.02
-      this.app.renderer.render(this.app.scene, this.app.camera)
-      this.animationFrame = requestAnimationFrame(loop)
+      app.renderer.render(app.scene, app.camera)
+      animationFrame = requestAnimationFrame(loop)
     }
     loop()
-    this.app.addControls()
+    app.addControls()
   }
 }
 </script>
