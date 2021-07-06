@@ -4,9 +4,9 @@
   // 设置prettier扩展格式化2个空格
   "prettier.tabWidth": 2,
   // 设置prettier扩展格式化单引号
-  "prettier.singleQuote": true,
+  "prettier.singleQuote": true, // interface内声明的变量结尾必须带上分号
   // 设置prettier扩展末尾不带分号
-  "prettier.semi": false,
+  // "prettier.semi": false,
   // 设置prettier扩展末尾不带逗号
   "prettier.trailingComma": "none",
   // 设置prettier扩展代码宽度130

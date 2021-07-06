@@ -52,7 +52,8 @@ module.exports = {
   extends: [
     'plugin:vue/vue3-essential',
     'eslint:recommended'
-    '@vue/typescript/recommended'
+    // 该行可选择性注释
+    // '@vue/typescript/recommended'
   ],
   parserOptions: {
     // 新加，需安装依赖yarn add babel-eslint -D，否则router下index.ts文件报错
