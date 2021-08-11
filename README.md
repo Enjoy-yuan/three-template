@@ -74,7 +74,7 @@ module.exports = {
 # .vscode
 ```
 
-## 4.在 vue3.0 中使用 threes.js 声明变量报错
+## 4.在 vue3.0 中使用 three.js 声明变量报错
 
 - 须将变量声明在外部
 
